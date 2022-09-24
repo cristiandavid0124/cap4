@@ -1,4 +1,11 @@
 # cap4
+# Cristian David Naranjo Orjuela
+requisitos = 
+
+    Python version 3.6 o mayor
+    Matplotlib and numpy librarias
+    Git
+    
 repositorio teoria cuantica basica secion 4.1
 modelar los ejercisios:
 
