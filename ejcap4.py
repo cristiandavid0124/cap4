@@ -89,6 +89,19 @@ v = [
     [[-2, 1]],
     [[1, -3]],
     [[0, -1]]
+# Exercise # 4.4.1
+
+def UnitaryVerify(u1, u):
+    if unitMatrix(m)(U1) and unitMatrix(m)(u):
+        answer = lb.multmatrices(u1, u)
+        return unitMatrix(answer)
+
+
+# Exercise # 4.4.2
+def Experiment(v, n, clicks):
+    for i in range(clicks):
+        v = lb.multescalarvector(v, n)
+    return v
 ]
 # p = 7
 # print(probposicion(v, p))
