@@ -1,5 +1,7 @@
 import operaciones as lb
 import math
+from numpy import linalg as Alg
+import numpy as np
 #ejercicios cap 4
 
 # n: número de posiciones, v: vector, p: posición p
@@ -77,7 +79,58 @@ def dinamica(n, m, v):
         # v3 = lb.multmatrices(l, v2)
         return v2  # v2 es el estado final
 
+def cambia(val):
+    return [val.real, val.img]
 
+def vectorespropios(vector):
+    a = []
+    for i in vector:
+        a.append([i.real, i.imag])
+    return a
+
+
+def eigen_values(omega):
+    obs = np.array(omega)
+    a, b = np.linalg.eig(observable)
+
+    return a, b
+
+# Exercise  4.3.1
+
+def transita(obs):
+    a, b = eigen_values(observable)
+    psi = []
+    for i in b:
+        new = vectorespropios(i)
+        psi.append(new)
+    return psi
+
+# Exercise  4.3.2
+
+def distribucion(obs):
+    vecti = [[1, 0], [0, 0]]
+    j, k = eigen_values(obs)
+    vvector_nul = [0, 0]
+    for i in range(len(j)):
+        tra = cambia(j[i])
+        lec= vectorespropios(k[:, i])
+        prob = lb.multmatrices(tra, [longitud_vector([transicion(lec, vecti)]) ** 2, 0])
+        vvector_nul = suma(vvector_nul, prob)
+    return vvector_nul
+
+
+# Exercise # 4.4.1
+def ejercicio_4_4_1(u1, u):
+    if mat_unitaria(m)(U1) and mat_unitaria(m)(u):
+        answer = lb.multmatrices(u1, u)
+        return lb.matrizunitaria(answer)
+
+
+# Exercise # 4.4.2
+def Experiment(v, n, clicks):
+    for i in range(clicks):
+        v = lb.multescalarvector(v, n)
+    return v
 v = [
     [[2, 1]],
     [[-1, 2]],
@@ -89,19 +142,6 @@ v = [
     [[-2, 1]],
     [[1, -3]],
     [[0, -1]]
-# Exercise # 4.4.1
-
-def UnitaryVerify(u1, u):
-    if unitMatrix(m)(U1) and unitMatrix(m)(u):
-        answer = lb.multmatrices(u1, u)
-        return unitMatrix(answer)
-
-
-# Exercise # 4.4.2
-def Experiment(v, n, clicks):
-    for i in range(clicks):
-        v = lb.multescalarvector(v, n)
-    return v
 ]
 # p = 7
 # print(probposicion(v, p))
